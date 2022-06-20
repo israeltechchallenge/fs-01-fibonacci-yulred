@@ -1,0 +1,17 @@
+body {
+    padding: 6.25rem 10.25rem 6.25rem 10.25rem;
+    font-size: 1.5rem;
+}
+
+h1 {
+    font-size: 4.5rem;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
