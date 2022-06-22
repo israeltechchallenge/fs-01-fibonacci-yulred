@@ -1,18 +1,5 @@
 body {
     padding: 6.25rem 10.25rem 6.25rem 10.25rem;
-    font-size: 1.5rem;
-}
-
-h1 {
-    font-size: 4.5rem;
-}
-
-.error {
-    font-size: 1rem;
-}
-
-.hidden {
-    display: none;
 }
 
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {

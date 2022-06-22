@@ -8,22 +8,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
-    <h1 class="mb-5">Fibonacci Calculator</h1>
+<body class="fs-4">
+    <h1 class="display-1 mb-5"><strong>Fibonacci Calculator</strong></h1>
     <div class="form-group d-flex flex-row align-items-center">
         <label for="userinput" class="me-3">The Fibonnaci of</label>
         <div class="col-sm-1 me-3">
             <input type="number" class="form-control input-sm" id="userinput" placeholder="#" max="50">
         </div>
         <button type="button" class="btn btn-primary me-3">is</button>
-        <div class="spinner-border hidden" role="status">
+        <div class="spinner-border d-none" role="status">
             <span class="sr-only"></span>
         </div>
         <div id="fibonacci"></div>
     </div>
     <div class="form-group d-flex flex-row justify-content-end">
-        <div id="nan-tooltip" class="cs-tooltip hidden">Must be a whole number.</div>
-        <div id="max-tooltip" class="cs-tooltip hidden">Can't be larger than 50.</div>
+        <div id="nan-tooltip" class="cs-tooltip d-none">Must be a whole number.</div>
+        <div id="max-tooltip" class="cs-tooltip d-none">Can't be larger than 50.</div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="./js/server.js"></script>

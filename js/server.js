@@ -13,32 +13,32 @@ button.addEventListener("click", function() {
 
     fibonacci.innerHTML = ``
     input.classList.remove("is-invalid");
-    nanTooltip.classList.add("hidden");
-    maxTooltip.classList.add("hidden");
+    nanTooltip.classList.add("d-none");
+    maxTooltip.classList.add("d-none");
 
     if (regex.test(userinput) === false) {
         input.classList.add("is-invalid");
-        nanTooltip.classList.remove("hidden");
+        nanTooltip.classList.remove("d-none");
         return;
     }
 
     if (userinput > 50) {
         input.classList.add("is-invalid");
-        maxTooltip.classList.remove("hidden");
+        maxTooltip.classList.remove("d-none");
         return;
     }
 
-    spinner.classList.remove("hidden");
+    spinner.classList.remove("d-none");
 
     setTimeout(function() {
-        spinner.classList.add("hidden");
+        spinner.classList.add("d-none");
     }, "500");
     
     fetch(url)
     .then(function(response) {
 
         if (!response.ok) {
-            fibonacci.innerHTML = `<div class="text-danger error">Server Error: 42 is the meaning of life</div>`; 
+            fibonacci.innerHTML = `<div class="text-danger fs-6">Server Error: 42 is the meaning of life</div>`; 
         }
 
         return response.json();
