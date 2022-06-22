@@ -7,6 +7,14 @@ h1 {
     font-size: 4.5rem;
 }
 
+.error {
+    font-size: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -14,4 +22,19 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+.form-control.is-invalid {
+    color: #dc3545;
+    background-image: none;
+}
+
+.cs-tooltip {
+    margin: 1rem 57.2rem 0 0;
+    padding: 0.1rem 0.3rem 0.2rem 0.3rem;
+    width: fit-content;
+    font-size: 1rem;
+    color: #A94442;
+    background-color: #F2DEDE;
+    border-radius: 5px;
 }
