@@ -1,7 +1,9 @@
 const button = document.querySelector("button");
-const fibonacci = document.getElementById("fibonacci");
-const spinner = document.querySelector(".spinner-border");
 const input = document.querySelector("input");
+const fibonacci = document.getElementById("fibonacci");
+const fibonacciRes = document.getElementById("previous-res");
+const spinnerOne = document.getElementById("spinner-one");
+const spinnerTwo = document.getElementById("spinner-two");
 const nanTooltip = document.getElementById("nan-tooltip");
 const maxTooltip = document.getElementById("max-tooltip");
 
@@ -15,6 +17,7 @@ button.addEventListener("click", function() {
     input.classList.remove("is-invalid");
     nanTooltip.classList.add("d-none");
     maxTooltip.classList.add("d-none");
+    fibonacciRes.replaceChildren();
 
     if (regex.test(userinput) === false) {
         input.classList.add("is-invalid");
@@ -28,10 +31,10 @@ button.addEventListener("click", function() {
         return;
     }
 
-    spinner.classList.remove("d-none");
+    spinnerOne.classList.remove("d-none");
 
     setTimeout(function() {
-        spinner.classList.add("d-none");
+        spinnerOne.classList.add("d-none");
     }, "500");
     
     fetch(url)
@@ -47,8 +50,9 @@ button.addEventListener("click", function() {
     .then(function(data) {
 
         let result = data.result;
-         
+        
         fibonacci.innerHTML = `<strong><u>${result}</u></strong>`;
+        previousResults();
     })
 
     .catch(function(error) {
@@ -62,3 +66,40 @@ input.addEventListener("keyup", function(e) {
         button.click();
     }
 });
+
+function previousResults() {
+
+    const url = "http://localhost:5050/getFibonacciResults";
+
+    fetch(url)
+    .then(function(response) {
+
+        return response.json();
+    })
+
+    .then(function(data) {
+
+        let previousRes = data.results;
+        console.log(data.results);
+
+        previousRes.sort(function (a, b) {
+
+            return a.createdDate - b.createdDate;
+        });
+        console.log(data.results);
+
+        spinnerTwo.classList.remove("d-none");
+
+        setTimeout(function() {
+            spinnerTwo.classList.add("d-none");
+
+            for (let i = 0; i < previousRes.length; i++) {
+                let text = `<div class="border-bottom border-dark pt-1 pb-1">The Fibonnaci of <strong>${previousRes[i].number}</strong> is <strong>${previousRes[i].result}</strong>. Calculated at: ${new Date(previousRes[i].createdDate)}</div>`;
+    
+                fibonacciRes.insertAdjacentHTML("afterbegin", text);
+            }
+        }, "500");
+    })
+}
+
+previousResults();
