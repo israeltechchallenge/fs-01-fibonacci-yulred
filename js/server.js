@@ -11,7 +11,7 @@ button.addEventListener("click", function() {
     let url = "http://localhost:5050/fibonacci/" + userinput;
     const regex = /[0-9]/;
 
-    fibonacci.innerHTML = ``
+    fibonacci.innerHTML = ``;
     input.classList.remove("is-invalid");
     nanTooltip.classList.add("d-none");
     maxTooltip.classList.add("d-none");
@@ -38,7 +38,7 @@ button.addEventListener("click", function() {
     .then(function(response) {
 
         if (!response.ok) {
-            fibonacci.innerHTML = `<div class="text-danger fs-6">Server Error: 42 is the meaning of life</div>`; 
+            throw "Server Error: 42 is the meaning of life";
         }
 
         return response.json();
@@ -49,6 +49,10 @@ button.addEventListener("click", function() {
         let result = data.result;
          
         fibonacci.innerHTML = `<strong><u>${result}</u></strong>`;
+    })
+
+    .catch(function(error) {
+        fibonacci.innerHTML = `<div class="text-danger fs-6">${error}</div>`;
     })
 });
 
