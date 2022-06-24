@@ -80,13 +80,11 @@ function previousResults() {
     .then(function(data) {
 
         let previousRes = data.results;
-        console.log(data.results);
 
         previousRes.sort(function (a, b) {
 
             return a.createdDate - b.createdDate;
         });
-        console.log(data.results);
 
         spinnerTwo.classList.remove("d-none");
 
