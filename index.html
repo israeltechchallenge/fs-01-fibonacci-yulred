@@ -10,10 +10,10 @@
 </head>
 <body class="fs-4">
     <h1 class="display-1 mb-5"><strong>Fibonacci Calculator</strong></h1>
-    <div class="form-group d-flex flex-row align-items-center mb-5">
+    <div class="form-group d-flex flex-row align-items-center mb-1">
         <label for="userinput" class="me-3">The Fibonnaci of</label>
         <div class="col-sm-1 me-3">
-            <input type="number" class="form-control input-sm" id="userinput" placeholder="#" max="50">
+            <input type="number" class="form-control input-sm" id="userinput" placeholder="#" min="0" max="50">
         </div>
         <button type="button" class="btn btn-primary me-3">is</button>
         <div class="spinner-border d-none" role="status" id="spinner-one">
@@ -22,8 +22,12 @@
         <div id="fibonacci"></div>
     </div>
     <div class="form-group d-flex flex-row justify-content-end">
-        <div id="nan-tooltip" class="cs-tooltip d-none mb-5">Must be a whole number.</div>
-        <div id="max-tooltip" class="cs-tooltip d-none mb-5">Can't be larger than 50.</div>
+        <div id="nan-tooltip" class="cs-tooltip d-none">Must be a positive number.</div>
+        <div id="max-tooltip" class="cs-tooltip d-none">Can't be larger than 50.</div>
+    </div>
+    <div class="mb-5 form-check">
+        <input type="checkbox" id="save" name="save" class="form-check-input">
+        <label for="save" class="form-check-label">Save Calculation</label>
     </div>
     <div class="form-group d-flex flex-column">
         <div class="form-group d-flex flex-row align-items-baseline">

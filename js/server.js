@@ -6,11 +6,12 @@ const spinnerOne = document.getElementById("spinner-one");
 const spinnerTwo = document.getElementById("spinner-two");
 const nanTooltip = document.getElementById("nan-tooltip");
 const maxTooltip = document.getElementById("max-tooltip");
+const checkbox = document.querySelector(".form-check-input");
 
 button.addEventListener("click", function() {
 
     let userinput = document.getElementById("userinput").value;
-    const regex = /[0-9]/;
+    const regex = /[0-9](?<!(-\d))/;
 
     fibonacci.innerHTML = ``;
     input.classList.remove("is-invalid");
@@ -30,13 +31,18 @@ button.addEventListener("click", function() {
         return;
     }
 
-    spinnerOne.classList.remove("d-none");
+    if (checkbox.checked) {
+        spinnerOne.classList.remove("d-none");
 
-    setTimeout(function() {
-        spinnerOne.classList.add("d-none");
-    }, "500");
+        setTimeout(function() {
+            spinnerOne.classList.add("d-none");
+        }, "500");
 
-    fetchResults();
+        fetchResults();
+    } else {
+        calcFibonacci();
+        fetchPreviousResults();
+    }
 });
 
 input.addEventListener("keyup", function(e) {
@@ -45,6 +51,22 @@ input.addEventListener("keyup", function(e) {
         button.click();
     }
 });
+
+function calcFibonacci() {
+
+    let y = 1;
+    let n = 0;
+    let f = 0;
+    let userinput = document.getElementById("userinput").value;
+
+    for (let i = 2; i <= userinput; i++) {
+        f = n + y;
+        n = y;
+        y = f;
+    }
+
+    fibonacci.innerHTML = `<strong><u>${y}</u></strong>`;
+};
 
 async function fetchResults() {
 
@@ -61,15 +83,15 @@ async function fetchResults() {
         const data = await response.json();
     
         fibonacci.innerHTML = `<strong><u>${data.result}</u></strong>`;
-        previousResults();
+        fetchPreviousResults();
     }
 
     catch(error) {
         fibonacci.innerHTML = `<div class="text-danger fs-6">${error}</div>`;
     }
-}
+};
 
-async function previousResults() {
+async function fetchPreviousResults() {
 
     const url = "http://localhost:5050/getFibonacciResults";
 
@@ -105,6 +127,6 @@ async function previousResults() {
     catch(error) {
         fibonacciRes.innerHTML = `<div class="text-danger fs-6">${error}</div>`;
     }
-}
+};
 
-previousResults();
+fetchPreviousResults();
