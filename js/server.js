@@ -10,7 +10,6 @@ const maxTooltip = document.getElementById("max-tooltip");
 button.addEventListener("click", function() {
 
     let userinput = document.getElementById("userinput").value;
-    let url = "http://localhost:5050/fibonacci/" + userinput;
     const regex = /[0-9]/;
 
     fibonacci.innerHTML = ``;
@@ -36,28 +35,8 @@ button.addEventListener("click", function() {
     setTimeout(function() {
         spinnerOne.classList.add("d-none");
     }, "500");
-    
-    fetch(url)
-    .then(function(response) {
 
-        if (!response.ok) {
-            throw "Server Error: 42 is the meaning of life";
-        }
-
-        return response.json();
-    })
-
-    .then(function(data) {
-
-        let result = data.result;
-        
-        fibonacci.innerHTML = `<strong><u>${result}</u></strong>`;
-        previousResults();
-    })
-
-    .catch(function(error) {
-        fibonacci.innerHTML = `<div class="text-danger fs-6">${error}</div>`;
-    })
+    fetchResults();
 });
 
 input.addEventListener("keyup", function(e) {
@@ -67,17 +46,41 @@ input.addEventListener("keyup", function(e) {
     }
 });
 
-function previousResults() {
+async function fetchResults() {
+
+    let userinput = document.getElementById("userinput").value;
+    let url = "http://localhost:5050/fibonacci/" + userinput;
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw "Server Error: 42 is the meaning of life";
+        }
+
+        const data = await response.json();
+    
+        fibonacci.innerHTML = `<strong><u>${data.result}</u></strong>`;
+        previousResults();
+    }
+
+    catch(error) {
+        fibonacci.innerHTML = `<div class="text-danger fs-6">${error}</div>`;
+    }
+}
+
+async function previousResults() {
 
     const url = "http://localhost:5050/getFibonacciResults";
 
-    fetch(url)
-    .then(function(response) {
+    try {
+        const response = await fetch(url);
 
-        return response.json();
-    })
+        if (!response.ok) {
+            throw Error(`${response.status}`);
+        }
 
-    .then(function(data) {
+        const data = await response.json();
 
         let previousRes = data.results;
 
@@ -97,7 +100,11 @@ function previousResults() {
                 fibonacciRes.insertAdjacentHTML("afterbegin", text);
             }
         }, "500");
-    })
+    }
+
+    catch(error) {
+        fibonacciRes.innerHTML = `<div class="text-danger fs-6">${error}</div>`;
+    }
 }
 
 previousResults();
