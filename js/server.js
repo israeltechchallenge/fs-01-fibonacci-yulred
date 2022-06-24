@@ -7,6 +7,7 @@ const spinnerTwo = document.getElementById("spinner-two");
 const nanTooltip = document.getElementById("nan-tooltip");
 const maxTooltip = document.getElementById("max-tooltip");
 const checkbox = document.querySelector(".form-check-input");
+const select = document.getElementById("sort");
 
 button.addEventListener("click", function() {
 
@@ -50,6 +51,10 @@ input.addEventListener("keyup", function(e) {
         e.preventDefault();
         button.click();
     }
+});
+
+select.addEventListener("change", function() {
+    fetchPreviousResults();
 });
 
 function calcFibonacci() {
@@ -110,6 +115,30 @@ async function fetchPreviousResults() {
 
             return a.createdDate - b.createdDate;
         });
+
+        let selected = select.options[select.selectedIndex].value;
+
+        if (selected === "number-asc") {
+            previousRes.sort(function (a, b) {
+                fibonacciRes.replaceChildren();
+                return b.number - a.number;
+            })
+        } else if (selected === "number-desc") {
+            previousRes.sort(function (a, b) {
+                fibonacciRes.replaceChildren();
+                return a.number - b.number;
+            })
+        } else if (selected === "date-asc") {
+            previousRes.sort(function (a, b) {
+                fibonacciRes.replaceChildren();
+                return b.createdDate - a.createdDate;
+            })
+        } else if (selected === "date-desc") {
+            previousRes.sort(function (a, b) {
+                fibonacciRes.replaceChildren();
+                return a.createdDate - b.createdDate;
+            })
+        }
 
         spinnerTwo.classList.remove("d-none");
 

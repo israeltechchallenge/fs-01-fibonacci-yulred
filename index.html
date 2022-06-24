@@ -31,10 +31,19 @@
     </div>
     <div class="form-group d-flex flex-column">
         <div class="form-group d-flex flex-row align-items-baseline">
-            <div class="display-3 me-3 mb-5"><strong>Results</strong></div>
+            <div class="display-3 me-3 mb-4"><strong>Results</strong></div>
             <div class="spinner-border d-none" role="status" id="spinner-two">
                 <span class="sr-only"></span>
             </div>
+        </div>
+        <div class="col-sm-2 mb-4">
+            <select name="sort" id="sort" class="form-select">
+                <option value="sorty-by" class="d-none" selected>Sort By</option>
+                <option value="number-asc">Number Asc</option>
+                <option value="number-desc">Number Desc</option>
+                <option value="date-asc">Date Asc</option>
+                <option value="date-desc">Date Desc</option>
+            </select>
         </div>
         <div id="previous-res"></div>
     </div>
