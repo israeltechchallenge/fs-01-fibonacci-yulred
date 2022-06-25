@@ -9,7 +9,7 @@ button.addEventListener("click", function() {
 
     let userinput = document.getElementById("userinput").value;
     let url = "http://localhost:5050/fibonacci/" + userinput;
-    const regex = /[0-9]/;
+    const regex = /[0-9](?<!(-\d))/;
 
     fibonacci.innerHTML = ``;
     input.classList.remove("is-invalid");
