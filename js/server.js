@@ -10,7 +10,7 @@ const maxTooltip = document.getElementById("max-tooltip");
 button.addEventListener("click", function() {
 
     let userinput = document.getElementById("userinput").value;
-    const regex = /[0-9]/;
+    const regex = /[0-9](?<!(-\d))/;
 
     fibonacci.innerHTML = ``;
     input.classList.remove("is-invalid");
