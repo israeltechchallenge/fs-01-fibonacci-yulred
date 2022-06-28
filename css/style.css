@@ -17,9 +17,9 @@ input[type=number] {
 }
 
 .cs-tooltip {
-    margin: 0.5rem 57.2rem 0 0;
+    margin-top: 0.5rem;
     padding: 0.1rem 0.3rem 0.2rem 0.3rem;
-    width: fit-content;
+    width: max-content;
     font-size: 1rem;
     color: #A94442;
     background-color: #F2DEDE;

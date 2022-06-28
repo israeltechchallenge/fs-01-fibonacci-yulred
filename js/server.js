@@ -3,32 +3,31 @@ const input = document.querySelector("input");
 const fibonacci = document.getElementById("fibonacci");
 const fibonacciRes = document.getElementById("previous-res");
 const spinnerOne = document.getElementById("spinner-one");
-const spinnerTwo = document.getElementById("spinner-two");
-const nanTooltip = document.getElementById("nan-tooltip");
-const maxTooltip = document.getElementById("max-tooltip");
+const tooltip = document.getElementById("tooltip");
 const checkbox = document.querySelector(".form-check-input");
 const select = document.getElementById("sort");
+const userInput = document.getElementById("user-input");
 
 button.addEventListener("click", function() {
 
-    let userinput = document.getElementById("userinput").value;
     const regex = /[0-9](?<!(-\d))/;
 
     fibonacci.innerHTML = ``;
     input.classList.remove("is-invalid");
-    nanTooltip.classList.add("d-none");
-    maxTooltip.classList.add("d-none");
-    fibonacciRes.replaceChildren();
+    tooltip.classList.add("d-none");
+    tooltip.classList.add("d-none");
 
-    if (regex.test(userinput) === false) {
+    if (regex.test(userInput.value) === false) {
         input.classList.add("is-invalid");
-        nanTooltip.classList.remove("d-none");
+        tooltip.classList.remove("d-none");
+        tooltip.innerText = `Must be a positive number.`;
         return;
     }
 
-    if (userinput > 50) {
+    if (userInput.value > 50) {
         input.classList.add("is-invalid");
-        maxTooltip.classList.remove("d-none");
+        tooltip.classList.remove("d-none");
+        tooltip.innerText = `Can't be larger than 50.`;
         return;
     }
 
@@ -42,7 +41,6 @@ button.addEventListener("click", function() {
         fetchResults();
     } else {
         calcFibonacci();
-        fetchPreviousResults();
     }
 });
 
@@ -59,24 +57,24 @@ select.addEventListener("change", function() {
 
 function calcFibonacci() {
 
-    let y = 1;
-    let n = 0;
-    let f = 0;
-    let userinput = document.getElementById("userinput").value;
+    let num1 = 0;
+    let num2 = 1;
+    let fib = 0;
 
-    for (let i = 2; i <= userinput; i++) {
-        f = n + y;
-        n = y;
-        y = f;
+    for (let i = 2; i <= userInput.value; i++) {
+        fib = num1 + num2;
+        num1 = num2;
+        num2 = fib;
     }
 
-    fibonacci.innerHTML = `<strong><u>${y}</u></strong>`;
+    fibonacci.innerHTML = `<strong><u>${num2}</u></strong>`;
 };
+
+const calcURL = "http://localhost:5050/fibonacci/";
 
 async function fetchResults() {
 
-    let userinput = document.getElementById("userinput").value;
-    let url = "http://localhost:5050/fibonacci/" + userinput;
+    let url = calcURL + userInput.value;
 
     try {
         const response = await fetch(url);
@@ -96,12 +94,13 @@ async function fetchResults() {
     }
 };
 
+const historyURL = "http://localhost:5050/getFibonacciResults";
+const spinnerTwo = document.getElementById("spinner-two");
+
 async function fetchPreviousResults() {
 
-    const url = "http://localhost:5050/getFibonacciResults";
-
     try {
-        const response = await fetch(url);
+        const response = await fetch(historyURL);
 
         if (!response.ok) {
             throw Error(`${response.status}`);
@@ -112,7 +111,6 @@ async function fetchPreviousResults() {
         let previousRes = data.results;
 
         previousRes.sort(function (a, b) {
-
             return a.createdDate - b.createdDate;
         });
 
@@ -120,22 +118,18 @@ async function fetchPreviousResults() {
 
         if (selected === "number-asc") {
             previousRes.sort(function (a, b) {
-                fibonacciRes.replaceChildren();
                 return b.number - a.number;
             })
         } else if (selected === "number-desc") {
             previousRes.sort(function (a, b) {
-                fibonacciRes.replaceChildren();
                 return a.number - b.number;
             })
         } else if (selected === "date-asc") {
             previousRes.sort(function (a, b) {
-                fibonacciRes.replaceChildren();
                 return b.createdDate - a.createdDate;
             })
         } else if (selected === "date-desc") {
             previousRes.sort(function (a, b) {
-                fibonacciRes.replaceChildren();
                 return a.createdDate - b.createdDate;
             })
         }
@@ -144,6 +138,7 @@ async function fetchPreviousResults() {
 
         setTimeout(function() {
             spinnerTwo.classList.add("d-none");
+            fibonacciRes.replaceChildren();
 
             for (let i = 0; i < previousRes.length; i++) {
                 let text = `<div class="border-bottom border-dark pt-1 pb-1">The Fibonnaci of <strong>${previousRes[i].number}</strong> is <strong>${previousRes[i].result}</strong>. Calculated at: ${new Date(previousRes[i].createdDate)}</div>`;

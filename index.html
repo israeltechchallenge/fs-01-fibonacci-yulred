@@ -11,19 +11,18 @@
 <body class="fs-4">
     <h1 class="display-1 mb-5"><strong>Fibonacci Calculator</strong></h1>
     <div class="form-group d-flex flex-row align-items-center mb-1">
-        <label for="userinput" class="me-3">The Fibonnaci of</label>
+        <label for="user-input" class="me-3">The Fibonnaci of</label>
         <div class="col-sm-1 me-3">
-            <input type="number" class="form-control input-sm" id="userinput" placeholder="#" min="0" max="50">
+            <input type="number" class="form-control input-sm" id="user-input" placeholder="#" min="0" max="50">
+            <div class="position-relative">
+                <div id="tooltip" class="cs-tooltip d-none position-absolute top-0 end-0"></div>
+            </div>
         </div>
         <button type="button" class="btn btn-primary me-3">is</button>
         <div class="spinner-border d-none" role="status" id="spinner-one">
             <span class="sr-only"></span>
         </div>
         <div id="fibonacci"></div>
-    </div>
-    <div class="form-group d-flex flex-row justify-content-end">
-        <div id="nan-tooltip" class="cs-tooltip d-none">Must be a positive number.</div>
-        <div id="max-tooltip" class="cs-tooltip d-none">Can't be larger than 50.</div>
     </div>
     <div class="form-check fs-6 mb-5">
         <input type="checkbox" id="save" name="save" class="form-check-input">
