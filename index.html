@@ -5,9 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS - 01 - Fibonacci</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
-    <p id="fibonacci">The Fibonacci of X is Y</p>
-    <script src="./js/index.js"></script>
+<body class="fs-4">
+    <h1 class="display-1 mb-5"><strong>Fibonacci Calculator</strong></h1>
+    <div class="form-group d-flex flex-row align-items-center mb-1">
+        <label for="user-input" class="me-3">The Fibonnaci of</label>
+        <div class="col-sm-1 me-3">
+            <input type="number" class="form-control input-sm" id="user-input" placeholder="#" min="0" max="50">
+            <div class="position-relative">
+                <div id="tooltip" class="cs-tooltip d-none position-absolute top-0 end-0"></div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary me-3">is</button>
+        <div class="spinner-border d-none" role="status" id="spinner-one">
+            <span class="sr-only"></span>
+        </div>
+        <div id="fibonacci"></div>
+    </div>
+    <div class="form-check fs-6 mb-5">
+        <input type="checkbox" id="save" name="save" class="form-check-input">
+        <label for="save" class="form-check-label">Save Calculation</label>
+    </div>
+    <div class="form-group d-flex flex-column">
+        <div class="form-group d-flex flex-row align-items-baseline">
+            <div class="display-3 me-3 mb-4"><strong>Results</strong></div>
+            <div class="spinner-border d-none" role="status" id="spinner-two">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+        <div class="col-sm-2 mb-4">
+            <select name="sort" id="sort" class="form-select">
+                <option value="sorty-by" class="d-none" selected>Sort By</option>
+                <option value="number-asc">Number Asc</option>
+                <option value="number-desc">Number Desc</option>
+                <option value="date-asc">Date Asc</option>
+                <option value="date-desc">Date Desc</option>
+            </select>
+        </div>
+        <div id="previous-res"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="./js/server.js"></script>
 </body>
 </html>
